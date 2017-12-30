@@ -1,0 +1,7 @@
+OpenHab 2.0 Rules Generator;;;;;
+Dateiname;ESMDPES12.rules;;;;
+;;;;;
+Item;Tage;Stunde;Minute;Tag;Wert
+Heizung_EG_Wohnzimmer_4_SetTemperature;;18;0;Normaltag;21
+Heizung_EG_Wohnzimmer_4_SetTemperature;MO-FR;22;0;Normaltag;5
+Heizung_EG_Wohnzimmer_4_SetTemperature;SAT,SUN;23;0;Normaltag;5
