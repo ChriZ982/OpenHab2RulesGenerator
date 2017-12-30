@@ -82,8 +82,8 @@ void Rule::perform_syntax_check() const {
 
 std::string Rule::replace_all(const std::string &text, const std::string &from, const std::string &to) {
     std::string result = text;
-    int last_replace = 0;
-    while ((last_replace = result.find(from, last_replace)) != -1) {
+    size_t last_replace = 0;
+    while ((last_replace = result.find(from, last_replace)) != std::string::npos) {
         result.replace(last_replace, from.length(), to);
         last_replace += to.length();
     }
