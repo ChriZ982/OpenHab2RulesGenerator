@@ -115,6 +115,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\FileParser.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Rule.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\FileParser.h" />
+    <ClInclude Include="src\Rule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
