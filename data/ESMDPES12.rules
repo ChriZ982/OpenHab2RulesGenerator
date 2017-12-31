@@ -55,3 +55,27 @@ then
 	sendCommand(Licht2_EG_Wohnzimmer_1_State, OFF)
 end
 
+when
+	Time cron "0 0 18 ? * MON-SUN"
+then
+	if (Automatik_Heizung_ein_Normaltag.state==ON) {
+		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 21)
+	}
+end
+
+when
+	Time cron "0 0 22 ? * MON-FRI"
+then
+	if (Automatik_Heizung_aus_Normaltag.state==ON) {
+		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 5)
+	}
+end
+
+when
+	Time cron "0 0 23 ? * SAT,SUN"
+then
+	if (Automatik_Heizung_aus_Normaltag.state==ON) {
+		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 5)
+	}
+end
+

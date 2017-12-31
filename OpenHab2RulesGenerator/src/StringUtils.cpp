@@ -2,6 +2,14 @@
 
 namespace zindach_openhab_rules_generator {
 
+std::string StringUtils::convert_template_key(const std::string &text) {
+    std::string result = text;
+    for (auto &value : result) {
+        value = toupper(value);
+    }
+    return std::string("$") + result + std::string("$");
+}
+
 std::string StringUtils::replace_all(const std::string &text, const std::string &from, const std::string &to) {
     std::string result = text;
     size_t last_replace = 0;
@@ -44,14 +52,20 @@ std::vector<std::string> StringUtils::split(const std::string &text, const std::
     return result;
 }
 
-size_t StringUtils::get_index_line_begins(const std::vector<std::string> &lines, const std::string &begin) {
-    size_t i = 0;
-    for (; i < lines.size() && lines[i].find(begin) != 0; ++i) {}
-    return i;
+size_t StringUtils::get_index_line_begins(const std::vector<std::string> &lines, const std::string &begin,
+                                          const size_t start) {
+    size_t idx = std::string::npos;
+    for (size_t i = start; i < lines.size(); ++i) {
+        if (lines[i].find(begin) == 0) {
+            idx = i;
+            break;
+        }
+    }
+    return idx;
 }
 
 std::string StringUtils::get_config_value(const std::vector<std::string> &lines, const std::string &name,
                                           const std::string &delimiter) {
-    return split(lines[get_index_line_begins(lines, name)], delimiter)[1];
+    return split(lines[get_index_line_begins(lines, name, 0)], delimiter)[1];
 }
 }
