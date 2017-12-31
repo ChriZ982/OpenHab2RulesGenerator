@@ -12,6 +12,7 @@ public:
     static std::vector<std::string> read_file(const std::string &filename);
     static void write_file(const std::string &filename, const std::vector<std::string> &lines);
     static std::vector<Rule> read_rules_from_file(const std::vector<std::string> &lines);
+    static size_t get_index_line_begins(const std::vector<std::string> &lines, const std::string &begin);
     static std::vector<std::string> create_rules_file(const std::vector<Rule> &rules);
 };
 }
