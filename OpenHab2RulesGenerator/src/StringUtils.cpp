@@ -56,8 +56,20 @@ size_t StringUtils::get_index_line_begins(const std::vector<std::string> &lines,
                                           const size_t start) {
     size_t idx = std::string::npos;
     for (size_t i = start; i < lines.size(); ++i) {
-        if (lines[i].find(begin) == 0) {
+        if (trim(lines[i]).find(begin) == 0) {
             idx = i;
+            break;
+        }
+    }
+    return idx;
+}
+
+size_t StringUtils::get_index_line_begins_reverse(const std::vector<std::string> &lines, const std::string &begin,
+                                                  const size_t start) {
+    size_t idx = std::string::npos;
+    for (size_t i = 0; i <= start; ++i) {
+        if (trim(lines[start-i]).find(begin) == 0) {
+            idx = start-i;
             break;
         }
     }
@@ -67,5 +79,62 @@ size_t StringUtils::get_index_line_begins(const std::vector<std::string> &lines,
 std::string StringUtils::get_config_value(const std::vector<std::string> &lines, const std::string &name,
                                           const std::string &delimiter) {
     return split(lines[get_index_line_begins(lines, name, 0)], delimiter)[1];
+}
+
+std::string StringUtils::join_values(const std::map<std::string, std::string> &map) {
+    std::string result;
+    for (const auto &pair : map) {
+        if (!pair.second.empty()) {
+            result += pair.second + std::string(" ");
+        }
+    }
+    return result.substr(0, result.length() - 1);
+}
+
+std::string StringUtils::trim(const std::string &text) {
+    std::string result = text;
+    while ((result.find("\t") == 0 || result.find("\r") == 0 || result.find("\n") == 0 || result.find(" ") == 0) && !result.
+        empty()) {
+        result = result.substr(1, result.length() - 1);
+    }
+    while ((result.find("\t") == result.length() - 1 || result.find("\r") == result.length() - 1 || result.find("\n") ==
+        result.length() - 1 || result.find(" ") == result.length() - 1) && !result.empty()) {
+        result = result.substr(0, result.length() - 1);
+    }
+    return result;
+}
+
+std::vector<std::string> StringUtils::erase_unnecessary_whitespace(const std::vector<std::string> &lines) {
+    std::vector<std::string> result = lines;
+
+    bool empty_line_before = false;
+    auto iterator = result.begin();
+    while (iterator != result.end()) {
+        if (empty_line_before && trim(*iterator).empty()) {
+            iterator = result.erase(iterator);
+        } else if (!empty_line_before && trim(*iterator).empty()) {
+            empty_line_before = true;
+            ++iterator;
+        } else {
+            bool space_before = false;
+            auto ch_iterator = iterator->begin();
+            while (ch_iterator != iterator->end()) {
+                if (space_before && *ch_iterator == ' ') {
+                    ch_iterator = iterator->erase(ch_iterator);
+                } else if (!space_before && *ch_iterator == ' ') {
+                    space_before = true;
+                    ++ch_iterator;
+                } else {
+                    space_before = false;
+                    ++ch_iterator;
+                }
+            }
+
+            empty_line_before = false;
+            ++iterator;
+        }
+    }
+
+    return result;
 }
 }

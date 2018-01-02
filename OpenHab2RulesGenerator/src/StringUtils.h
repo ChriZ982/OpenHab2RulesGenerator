@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
+#include <map>
 
 namespace zindach_openhab_rules_generator {
 
@@ -12,7 +13,12 @@ public:
     static std::vector<std::string> split(const std::string &text, const std::string &delimiter);
     static size_t get_index_line_begins(const std::vector<std::string> &lines, const std::string &begin,
                                         const size_t start);
+    static size_t get_index_line_begins_reverse(const std::vector<std::string> &lines, const std::string &begin,
+                                                const size_t start);
     static std::string get_config_value(const std::vector<std::string> &lines, const std::string &name,
                                         const std::string &delimiter);
+    static std::string join_values(const std::map<std::string, std::string> &map);
+    static std::string trim(const std::string &text);
+    static std::vector<std::string> erase_unnecessary_whitespace(const std::vector<std::string> &lines);
 };
 }
