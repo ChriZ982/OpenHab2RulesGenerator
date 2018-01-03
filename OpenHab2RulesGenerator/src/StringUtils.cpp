@@ -1,11 +1,12 @@
 ﻿#include "StringUtils.h"
+#include <locale>
 
 namespace zindach_openhab_rules_generator {
 
 std::string StringUtils::convert_template_key(const std::string &text) {
     std::string result = text;
     for (auto &value : result) {
-        value = toupper(value);
+        value = std::toupper(value, std::locale());
     }
     return std::string("$") + result + std::string("$");
 }
@@ -64,12 +65,24 @@ size_t StringUtils::get_index_line_begins(const std::vector<std::string> &lines,
     return idx;
 }
 
+size_t StringUtils::get_index_line_equals(const std::vector<std::string> &lines, const std::string &text,
+                                          const size_t start) {
+    size_t idx = std::string::npos;
+    for (size_t i = start; i < lines.size(); ++i) {
+        if (trim(lines[i]) == text) {
+            idx = i;
+            break;
+        }
+    }
+    return idx;
+}
+
 size_t StringUtils::get_index_line_begins_reverse(const std::vector<std::string> &lines, const std::string &begin,
                                                   const size_t start) {
     size_t idx = std::string::npos;
     for (size_t i = 0; i <= start; ++i) {
-        if (trim(lines[start-i]).find(begin) == 0) {
-            idx = start-i;
+        if (trim(lines[start - i]).find(begin) == 0) {
+            idx = start - i;
             break;
         }
     }
@@ -136,5 +149,23 @@ std::vector<std::string> StringUtils::erase_unnecessary_whitespace(const std::ve
     }
 
     return result;
+}
+
+size_t StringUtils::find_closing_brace(const std::vector<std::string> &lines, const size_t if_idx) {
+    size_t end_if_line_idx = std::string::npos;
+    int opened_if_statements = 1;
+    for (size_t j = if_idx + 1; j < lines.size(); ++j) {
+        std::string trim_line = trim(lines[j]);
+        if (trim_line == "}") {
+            --opened_if_statements;
+        } else if (trim_line.find("if") == 0 && trim_line.find_last_of("{") == trim_line.size() - 1) {
+            ++opened_if_statements;
+        }
+        if (opened_if_statements == 0) {
+            end_if_line_idx = j;
+            break;
+        }
+    }
+    return end_if_line_idx;
 }
 }

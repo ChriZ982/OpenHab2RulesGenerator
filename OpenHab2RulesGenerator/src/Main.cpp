@@ -15,7 +15,8 @@ int main() {
     std::map<std::string, org::Template> templates = org::FileParser::read_templates_from_file(template_lines);
 
     std::vector<std::string> out_lines = org::FileParser::create_rules_file(rules, templates);
-    out_lines = org::FileParser::group_times(out_lines);
+    out_lines = org::FileParser::group_by_condition(out_lines);
+    out_lines = org::FileParser::group_by_if_condition(out_lines);
     out_lines = org::StringUtils::erase_unnecessary_whitespace(out_lines);
 
     fixed_lines.emplace_back("");

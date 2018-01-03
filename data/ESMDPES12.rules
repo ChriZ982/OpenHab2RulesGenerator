@@ -39,13 +39,11 @@ then
 		sendCommand(Licht_EG_Wohnzimmer_1_Level, 10)
 	}
 	if (Automatik_Rolladen_runter.state==ON) {
-		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, DOWN)
-	}
-	if (Automatik_Rolladen_runter.state==ON) {
-		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, DOWN)
-	}
-	if (Automatik_Rolladen_runter.state==ON) {
 		sendCommand(Rolladen1_EG_Wohnzimmer_1_Level, DOWN)
+		Thread::sleep(2000)
+		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, DOWN)
+		Thread::sleep(2000)
+		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, DOWN)
 	}
 end
 
@@ -81,8 +79,7 @@ when
 then
 	if (Automatik_Heizung_aus_Normaltag.state==ON) {
 		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 5)
-	}
-	if (Automatik_Heizung_aus_Normaltag.state==ON) {
+		Thread::sleep(2000)
 		sendCommand(Heizung_OG_KinderzimmerCZ_4_SetTemperature, 5)
 	}
 end
@@ -93,8 +90,7 @@ when
 then
 	if (Automatik_Heizung_aus_Normaltag.state==ON) {
 		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 5)
-	}
-	if (Automatik_Heizung_aus_Normaltag.state==ON) {
+		Thread::sleep(2000)
 		sendCommand(Heizung_OG_KinderzimmerCZ_4_SetTemperature, 5)
 	}
 end
@@ -105,8 +101,7 @@ when
 then
 	if (Automatik_Heizung_aus_Feiertag.state==ON) {
 		sendCommand(Heizung_EG_Wohnzimmer_4_SetTemperature, 5)
-	}
-	if (Automatik_Heizung_aus_Feiertag.state==ON) {
+		Thread::sleep(2000)
 		sendCommand(Heizung_OG_KinderzimmerCZ_4_SetTemperature, 5)
 	}
 end
@@ -126,8 +121,7 @@ when
 then
 	if (Automatik_Heizung_ein_Feiertag.state==ON) {
 		sendCommand(Heizung_EG_Kueche_4_SetTemperature, 21)
-	}
-	if (Automatik_Heizung_ein_Feiertag.state==ON) {
+		Thread::sleep(2000)
 		sendCommand(Heizung_OG_Bad_4_SetTemperature, 21)
 	}
 end
@@ -156,8 +150,7 @@ when
 then
 	if (Automatik_Heizung_ein_Normaltag.state==ON) {
 		sendCommand(Heizung_EG_Kueche_4_SetTemperature, 21)
-	}
-	if (Automatik_Heizung_ein_Normaltag.state==ON) {
+		Thread::sleep(2000)
 		sendCommand(Heizung_OG_Bad_4_SetTemperature, 21)
 	}
 end
@@ -237,27 +230,23 @@ when
 then
 	if (Automatik_Rolladen_rauf.state==ON) {
 		sendCommand(Rolladen1_EG_Wohnzimmer_1_Level, UP)
-	}
-	if (Automatik_Rolladen_ritze.state==ON) {
-		if(Rolladen3_EG_Wohnzimmer_1_Level.state > 95) {
-			sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, 90)
-		}
-	}
-	if (Automatik_Rolladen_ritze.state==ON) {
-		if(Rolladen2_EG_Wohnzimmer_1_Level.state > 95) {
-			sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, 90)
-		}
+		Thread::sleep(2000)
+		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, UP)
+		Thread::sleep(2000)
+		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, UP)
 	}
 	if (Automatik_Rolladen_ritze.state==ON) {
 		if(Rolladen1_EG_Wohnzimmer_1_Level.state > 95) {
 			sendCommand(Rolladen1_EG_Wohnzimmer_1_Level, 90)
 		}
-	}
-	if (Automatik_Rolladen_rauf.state==ON) {
-		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, UP)
-	}
-	if (Automatik_Rolladen_rauf.state==ON) {
-		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, UP)
+		Thread::sleep(2000)
+		if(Rolladen2_EG_Wohnzimmer_1_Level.state > 95) {
+			sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, 90)
+		}
+		Thread::sleep(2000)
+		if(Rolladen3_EG_Wohnzimmer_1_Level.state > 95) {
+			sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, 90)
+		}
 	}
 end
 
@@ -267,27 +256,23 @@ when
 then
 	if (Automatik_Rolladen_rauf.state==ON) {
 		sendCommand(Rolladen1_EG_Wohnzimmer_1_Level, UP)
-	}
-	if (Automatik_Rolladen_ritze.state==ON) {
-		if(Rolladen3_EG_Wohnzimmer_1_Level.state > 95) {
-			sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, 90)
-		}
-	}
-	if (Automatik_Rolladen_ritze.state==ON) {
-		if(Rolladen2_EG_Wohnzimmer_1_Level.state > 95) {
-			sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, 90)
-		}
+		Thread::sleep(2000)
+		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, UP)
+		Thread::sleep(2000)
+		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, UP)
 	}
 	if (Automatik_Rolladen_ritze.state==ON) {
 		if(Rolladen1_EG_Wohnzimmer_1_Level.state > 95) {
 			sendCommand(Rolladen1_EG_Wohnzimmer_1_Level, 90)
 		}
-	}
-	if (Automatik_Rolladen_rauf.state==ON) {
-		sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, UP)
-	}
-	if (Automatik_Rolladen_rauf.state==ON) {
-		sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, UP)
+		Thread::sleep(2000)
+		if(Rolladen2_EG_Wohnzimmer_1_Level.state > 95) {
+			sendCommand(Rolladen2_EG_Wohnzimmer_1_Level, 90)
+		}
+		Thread::sleep(2000)
+		if(Rolladen3_EG_Wohnzimmer_1_Level.state > 95) {
+			sendCommand(Rolladen3_EG_Wohnzimmer_1_Level, 90)
+		}
 	}
 end
 
