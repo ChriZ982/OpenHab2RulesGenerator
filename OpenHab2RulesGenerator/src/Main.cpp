@@ -1,3 +1,7 @@
+#if defined(unix) || defined(__unix__) || defined(__unix)
+#define PLATFORM_UNIX
+#endif
+
 #include <iostream>
 #include "FileParser.h"
 #include "StringUtils.h"
