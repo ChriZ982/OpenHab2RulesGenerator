@@ -112,7 +112,7 @@ std::vector<std::string> FileParser::group_by_condition(const std::vector<std::s
             ++iterator;
         }
     }
-    std::cout << "Grouping " << groups.size() << " rules.\n";
+    std::cout << "(2/6) Grouping "<< groups.size() <<" rules by condition\n";
 
     for (const auto &pair : groups) {
         result[StringUtils::get_index_line_begins_reverse(result, "rule", pair.second[0])] = "rule \"Group " + StringUtils::
@@ -199,7 +199,7 @@ std::vector<std::string> FileParser::group_by_if_condition(const std::vector<std
             ++rule_iterator;
         }
     }
-    std::cout << "Optimizing if conditions in " << if_conditions.size() << " rules.\n";
+    std::cout << "(3/6) Grouping " << if_conditions.size() << " if statements by condition\n";
 
     rule_iterator = if_conditions.begin();
     for (size_t k = 0; k < if_conditions.size(); ++k) {

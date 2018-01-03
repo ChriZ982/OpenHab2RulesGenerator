@@ -1,7 +1,7 @@
 OpenHab 2.0 Rules Generator;;;;;;;
 Dateiname;ESMDPES12.rules;;;;;;
-Benutzerdefinierter Inhalt;rules.rules;;;;;;
-Regel Vorlagen;rules.cfg;;;;;;
+Benutzerdefinierter Inhalt;fixed.rules;;;;;;
+Regel Vorlagen;templates.rules;;;;;;
 ;;;;;;;
 Tabelle;;;;;;;
 Item;Aktion;Tage;Stunde;Minute;Tag;Wert;Trigger
