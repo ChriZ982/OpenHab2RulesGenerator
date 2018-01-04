@@ -12,9 +12,9 @@ std::vector<std::string> erase_unnecessary_whitespace(std::vector<std::string> l
 std::string join_values(const std::map<std::string, std::string> &map);
 std::vector<std::string> split(const std::string &text, const std::string &delimiter);
 
-size_t line_index_equals(const std::vector<std::string> &lines, const std::string &text, const size_t start);
+size_t line_index_equals(const std::vector<std::string> &lines, const std::string &text, const size_t start = 0);
 size_t line_index_equals_reverse(const std::vector<std::string> &lines, const std::string &text, const size_t start);
-size_t line_index_starts_with(const std::vector<std::string> &lines, const std::string &begin, const size_t start);
+size_t line_index_starts_with(const std::vector<std::string> &lines, const std::string &begin, const size_t start = 0);
 size_t line_index_starts_with_reverse(const std::vector<std::string> &lines, const std::string &begin, const size_t start);
 
 std::string left_trim(std::string text);

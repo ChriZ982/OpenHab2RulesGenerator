@@ -86,7 +86,7 @@ std::vector<std::string> split(const std::string &text, const std::string &delim
     return result;
 }
 
-size_t line_index_equals(const std::vector<std::string> &lines, const std::string &text, const size_t start = 0) {
+size_t line_index_equals(const std::vector<std::string> &lines, const std::string &text, const size_t start) {
     for (size_t i = start; i < lines.size(); ++i) {
         if (trim(lines[i]) == text) {
             return i;
@@ -106,7 +106,7 @@ size_t line_index_equals_reverse(const std::vector<std::string> &lines, const st
     return std::string::npos;
 }
 
-size_t line_index_starts_with(const std::vector<std::string> &lines, const std::string &begin, const size_t start = 0) {
+size_t line_index_starts_with(const std::vector<std::string> &lines, const std::string &begin, const size_t start) {
     for (size_t i = start; i < lines.size(); ++i) {
         if (left_trim(lines[i]).find(begin) == 0) {
             return i;

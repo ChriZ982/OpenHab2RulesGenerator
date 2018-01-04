@@ -83,14 +83,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\FileParser.cpp" />
+    <ClCompile Include="src\File.cpp" />
+    <ClCompile Include="src\Parser.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Optimizer.cpp" />
     <ClCompile Include="src\Rule.cpp" />
     <ClCompile Include="src\StringUtils.cpp" />
     <ClCompile Include="src\Template.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FileParser.h" />
+    <ClInclude Include="src\File.h" />
+    <ClInclude Include="src\Parser.h" />
+    <ClInclude Include="src\Optimizer.h" />
     <ClInclude Include="src\Rule.h" />
     <ClInclude Include="src\StringUtils.h" />
     <ClInclude Include="src\Template.h" />

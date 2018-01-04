@@ -1,98 +1,8 @@
-﻿#include "FileParser.h"
-#include <fstream>
-#include <iostream>
-#include <iterator>
-#include <sstream>
+﻿#include "Optimizer.h"
 #include "StringUtils.h"
-#include <set>
-#include <chrono>
+#include <iostream>
 
 namespace zindach_openhab_rules_generator {
-
-std::vector<std::string> read_file(const std::string &filename) {
-    std::wifstream file(filename);
-    if (!file) {
-        throw std::runtime_error("Error: File \"" + filename + "\" could not be opened for reading!");
-    }
-
-    std::vector<std::string> result;
-
-    for (std::wstring line; getline(file, line);) {
-#ifdef PLATFORM_UNIX
-        result.emplace_back(erase_all(std::string(line.begin(), line.end()), {"\r"}));
-#else
-        result.emplace_back(line.begin(), line.end());
-#endif
-    }
-
-    return result;
-}
-
-void write_file(const std::string &filename, const std::vector<std::string> &lines) {
-    std::wofstream file(filename, std::ios::trunc);
-    if (!file) {
-        throw std::runtime_error("Error: File \"" + filename + "\" could not be opened for writing!");
-    }
-
-    for (const auto &line : lines) {
-#ifdef PLATFORM_UNIX
-        file << std::wstring(line.begin(), line.end()) << "\r\n";
-#else
-        file << std::wstring(line.begin(), line.end()) << "\n";
-#endif
-    }
-}
-
-std::vector<Rule> read_rules_from_file(const std::vector<std::string> &lines) {
-    std::vector<Rule> result;
-    const size_t table_index = line_index_starts_with(lines, "Tabelle", 0);
-
-    std::vector<std::string> keys = split(lines[table_index + 1], ";");
-
-    for (size_t i = table_index + 2; i < lines.size(); ++i) {
-        result.emplace_back(keys, lines[i]);
-    }
-
-    return result;
-}
-
-std::map<std::string, Template> read_templates_from_file(const std::vector<std::string> &lines) {
-    std::map<std::string, Template> result;
-
-    size_t template_index = line_index_starts_with(lines, "#template:", 0);
-    while (template_index != std::string::npos) {
-        size_t next_template_index = line_index_starts_with(lines, "#template:", template_index + 1);
-        if (next_template_index == std::string::npos) {
-            next_template_index = lines.size();
-        }
-
-        std::vector<std::string> template_lines;
-        for (size_t i = template_index + 1; i < next_template_index; ++i) {
-            template_lines.emplace_back(lines[i]);
-        }
-        result[trim(erase_all(lines[template_index], {"#template:"}))] = Template(template_lines);
-
-        template_index = line_index_starts_with(lines, "#template:", template_index + 1);
-    }
-    return result;
-}
-
-std::vector<std::string> create_rules_file(std::vector<Rule> &rules,
-                                           std::map<std::string, Template> &templates) {
-    std::vector<std::string> result;
-
-    for (auto &rule : rules) {
-        const Template temp = templates[rule.value_map[std::string("Aktion")]];
-        std::vector<std::string> template_lines = temp.replace(rule.value_map);
-
-        result.emplace_back(std::string("rule \"") + join_values(rule.value_map) + std::string("\""));
-        for (auto template_line : template_lines) {
-            result.emplace_back(template_line);
-        }
-    }
-
-    return result;
-}
 
 std::vector<std::string> group_by_condition(std::vector<std::string> lines) {
     std::map<std::string, std::vector<size_t>> groups;
@@ -114,7 +24,7 @@ std::vector<std::string> group_by_condition(std::vector<std::string> lines) {
             ++iterator;
         }
     }
-    std::cout << "(2/6) Grouping " << groups.size() << " rules by condition\n";
+    std::cout << "\toptimizing " << groups.size() << " rules\n";
 
     for (auto pair = groups.begin(); pair != groups.end();) {
         const size_t rule_line = line_index_starts_with_reverse(lines, "rule", pair->second[0]);
@@ -191,7 +101,7 @@ std::vector<std::string> group_by_if_condition(const std::vector<std::string> &l
             ++rule_iterator;
         }
     }
-    std::cout << "(3/6) Grouping " << if_conditions.size() << " if statements by condition\n";
+    std::cout << "\toptimizing " << if_conditions.size() << " if statements\n";
 
     rule_iterator = if_conditions.begin();
     for (size_t k = 0; k < if_conditions.size(); ++k) {
