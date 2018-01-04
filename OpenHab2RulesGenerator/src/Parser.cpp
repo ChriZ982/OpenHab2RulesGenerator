@@ -3,7 +3,7 @@
 
 namespace zindach_openhab_rules_generator {
 
-std::vector<Rule> read_rules_from_file(const std::vector<std::string> &lines) {
+std::vector<Rule> read_rules_from_file(const std::vector<std::string> &lines, std::map<std::string, Template> &templates) {
     std::vector<Rule> result;
     const size_t table_index = line_index_starts_with(lines, "Tabelle");
 
@@ -17,7 +17,7 @@ std::vector<Rule> read_rules_from_file(const std::vector<std::string> &lines) {
     }
 
     for (size_t i = table_index + 2; i < lines.size(); ++i) {
-        result.emplace_back(keys, lines[i]);
+        result.emplace_back(keys, lines[i], templates);
     }
 
     return result;
@@ -42,15 +42,12 @@ std::map<std::string, Template> read_templates_from_file(const std::vector<std::
     return result;
 }
 
-std::vector<std::string> create_rules_file(std::vector<Rule> &rules, std::map<std::string, Template> &templates) {
+std::vector<std::string> create_rules_file(std::vector<Rule> &rules) {
     std::vector<std::string> result;
 
     for (auto &rule : rules) {
-        const Template &temp = templates[rule.value_map["Aktion"]];
-        std::vector<std::string> template_lines = temp.replace(rule.value_map);
-
-        result.emplace_back("rule \"" + join_values(rule.value_map) + "\"");
-        result.insert(result.end(), template_lines.begin(), template_lines.end());
+        auto rule_lines = rule.to_string();
+        result.insert(result.end(), rule_lines.begin(), rule_lines.end());
     }
 
     return result;

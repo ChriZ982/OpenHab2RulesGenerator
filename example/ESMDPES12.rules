@@ -33,7 +33,7 @@ end
 
 rule "Group Channel astrosun68b99d43civilDuskevent triggered END"
 when
-	Channel "astro:sun:68b99d43:civilDusk#event" triggered END	
+	Channel "astro:sun:68b99d43:civilDusk#event" triggered END
 then
 	if (Automatik_Licht_ein.state==ON) {
 		sendCommand(Licht_EG_Wohnzimmer_1_Level, 10)
