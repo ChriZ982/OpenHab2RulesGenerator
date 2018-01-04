@@ -1,10 +1,10 @@
 ﻿#include "Optimizer.h"
-#include "StringUtils.h"
 #include <iostream>
+#include "StringUtils.h"
 
 namespace zindach_openhab_rules_generator {
 
-std::vector<std::string> group_by_condition(std::vector<std::string> lines) {
+std::map<std::string, std::vector<size_t>> optimizable_rules(const std::vector<std::string> &lines) {
     std::map<std::string, std::vector<size_t>> groups;
 
     size_t when_line = line_index_equals(lines, "when", 0);
@@ -24,45 +24,45 @@ std::vector<std::string> group_by_condition(std::vector<std::string> lines) {
             ++iterator;
         }
     }
+
+    return groups;
+}
+
+std::vector<std::string> group_by_condition(std::vector<std::string> lines) {
+    auto groups = optimizable_rules(lines);
     std::cout << "\toptimizing " << groups.size() << " rules\n";
 
-    for (auto pair = groups.begin(); pair != groups.end();) {
-        const size_t rule_line = line_index_starts_with_reverse(lines, "rule", pair->second[0]);
-        lines[rule_line] = "rule \"Group " + erase_all(pair->first, {"*", "\"", "?", ":", "#"}) + "\"";
+    for (auto pair = groups.begin(); pair != groups.end(); pair = groups.erase(groups.begin())) {
+        const size_t first_rule_line_index = line_index_starts_with_reverse(lines, "rule", pair->second[0]);
 
-        std::vector<std::string> additional_lines;
+        lines[first_rule_line_index] = "rule \"Group " + erase_all(pair->first, {"*", "\"", "?", ":", "#"}) + "\"";
 
         for (size_t i = 1; i < pair->second.size(); ++i) {
-            const size_t rule_line_idx = line_index_starts_with_reverse(lines, "rule", pair->second[i]);
-            const size_t then_line_idx = line_index_equals(lines, "then", pair->second[i]);
-            const size_t end_line_idx = line_index_equals(lines, "end", pair->second[i]);
+            const size_t rule_line_index = line_index_starts_with_reverse(lines, "rule", pair->second[i]);
+            const size_t then_line_index = line_index_equals(lines, "then", rule_line_index);
+            const size_t end_line_index = line_index_equals(lines, "end", then_line_index);
 
-            additional_lines.insert(additional_lines.end(), lines.begin() + then_line_idx + 1,
-                                    lines.begin() + end_line_idx);
+            const std::vector<std::string> additional_lines(lines.begin() + then_line_index + 1,
+                                                            lines.begin() + end_line_index);
+
+            const size_t first_end_line_index = line_index_equals(lines, "end", first_rule_line_index);
+
+            lines.erase(lines.begin() + rule_line_index, lines.begin() + end_line_index + 1);
+            lines.insert(lines.begin() + first_end_line_index, additional_lines.begin(), additional_lines.end());
 
             for (auto &values : groups) {
                 for (auto &value : values.second) {
-                    if (value >= rule_line_idx) {
-                        value -= end_line_idx - rule_line_idx + 1;
+                    if (value > first_end_line_index) {
+                        value += additional_lines.size();
                     }
-                }
-            }
-
-            lines.erase(lines.begin() + rule_line_idx, lines.begin() + end_line_idx + 1);
-        }
-
-        const size_t end_line_idx = line_index_equals(lines, "end", pair->second[0]);
-        lines.insert(lines.begin() + end_line_idx, additional_lines.begin(), additional_lines.end());
-
-        pair = groups.erase(groups.begin());
-        for (auto &values : groups) {
-            for (auto &value : values.second) {
-                if (value >= end_line_idx) {
-                    value += additional_lines.size();
+                    if (value > end_line_index) {
+                        value -= end_line_index - rule_line_index + 1;
+                    }
                 }
             }
         }
     }
+
     return lines;
 }
 

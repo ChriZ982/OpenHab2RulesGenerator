@@ -13,7 +13,7 @@ std::vector<std::string> read_file(const std::string &filename) {
 
     for (std::wstring line; getline(file, line);) {
 #ifdef PLATFORM_UNIX
-            result.emplace_back(erase_all(std::string(line.begin(), line.end()), { "\r" }));
+        result.emplace_back(erase_all(std::string(line.begin(), line.end()), { "\r" }));
 #else
         result.emplace_back(line.begin(), line.end());
 #endif
@@ -30,7 +30,7 @@ void write_file(const std::string &filename, const std::vector<std::string> &lin
 
     for (const auto &line : lines) {
 #ifdef PLATFORM_UNIX
-            file << std::wstring(line.begin(), line.end()) << "\r\n";
+        file << std::wstring(line.begin(), line.end()) << "\r\n";
 #else
         file << std::wstring(line.begin(), line.end()) << "\n";
 #endif

@@ -2,12 +2,12 @@
 #define PLATFORM_UNIX
 #endif
 
+#include <chrono>
 #include <iostream>
-#include "Parser.h"
-#include "StringUtils.h"
 #include "File.h"
 #include "Optimizer.h"
-#include <chrono>
+#include "Parser.h"
+#include "StringUtils.h"
 
 namespace zohrg = zindach_openhab_rules_generator;
 
@@ -25,7 +25,7 @@ int main() {
         std::cout << "Output file:         " << out_file << "\n";
         std::cout << "Fixed rules file:    " << fixed_file << "\n";
         std::cout << "Template rules file: " << template_file << "\n\n";
-        
+
         std::cout << "(1/9) Reading rules from file\n";
         auto rules = zohrg::read_rules_from_file(in_lines);
         std::cout << "\tparsed " << rules.size() << " rules\n";
@@ -42,10 +42,10 @@ int main() {
 
         std::cout << "(4/9) Creating rules file\n";
         auto out_lines = create_rules_file(rules, templates);
-        
+
         std::cout << "(5/9) Grouping rules by condition\n";
         out_lines = zohrg::group_by_condition(out_lines);
-        
+
         std::cout << "(6/9) Grouping if statements by condition\n";
         out_lines = zohrg::group_by_if_condition(out_lines);
 

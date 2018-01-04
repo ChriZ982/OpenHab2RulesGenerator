@@ -9,12 +9,12 @@ Rule::Rule(const std::vector<std::string> &keys, const std::string &line) {
 
     for (size_t i = 0; i < keys.size(); ++i) {
         value_map[keys[i]] = values[i];
-        if(empty && !values[i].empty()) {
+        if (empty && !values[i].empty()) {
             empty = false;
         }
     }
 
-    if(empty) {
+    if (empty) {
         throw std::runtime_error("Error: Empty line in rules table!");
     }
 }
