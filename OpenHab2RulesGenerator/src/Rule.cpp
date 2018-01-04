@@ -4,9 +4,10 @@
 namespace zindach_openhab_rules_generator {
 
 Rule::Rule(const std::vector<std::string> &keys, const std::string &line) {
-    std::vector<std::string> values = StringUtils::split(line, ";");
+    const std::vector<std::string> values = split(line, ";");
+
     for (size_t i = 0; i < keys.size(); ++i) {
-        value_map[StringUtils::trim(keys[i])] = StringUtils::trim(values[i]);
+        value_map[keys[i]] = values[i];
     }
 }
 }
