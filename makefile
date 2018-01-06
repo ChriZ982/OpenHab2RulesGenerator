@@ -1,11 +1,16 @@
 CC := clang++
-EXE := OpenHab2RulesGenerator
+EXE := /linux/OH2RulesGenerator-linux-
 FLAGS := -std=c++14 -Wall -Wextra
+SOURCE := OpenHab2RulesGenerator/src/*.cpp
 
 all:
-	$(CC) $(FLAGS) OpenHab2RulesGenerator/src/*.cpp -o bin/linux/debug/$(EXE)
-	$(CC) $(FLAGS) -Ofast OpenHab2RulesGenerator/src/*.cpp -o bin/linux/release/$(EXE)
+	$(CC) $(FLAGS) -target x86_64-linux $(SOURCE) -o bin/Debug$(EXE)x64
+	$(CC) $(FLAGS) -target x86_64-linux -Ofast $(SOURCE) -o bin/Release$(EXE)x64
+	$(CC) $(FLAGS) -target i386-linux $(SOURCE) -o bin/Debug$(EXE)x86
+	$(CC) $(FLAGS) -target i386-linux -Ofast $(SOURCE) -o bin/Release$(EXE)x86
 
 clean:
-	rm -f bin/linux/Debug/$(EXE)
-	rm -f bin/linux/Release/$(EXE)
+	rm -f bin/Debug$(EXE)x64
+	rm -f bin/Release$(EXE)x64
+	rm -f bin/Debug$(EXE)x86
+	rm -f bin/Release$(EXE)x86
