@@ -3,7 +3,7 @@ Application for generating a rules file that can be used with OpenHab 2.0. A fil
 
 
 ## Getting started ##
-First of all download the binary file for your system architecture from the [releases](https://github.com/ChriZ982/OpenHab2RulesGenerator/releases). If you have any further questions on how to use the application, feel free to contact me.
+First of all download the binary file for your system architecture from the [releases](https://github.com/ChriZ982/OpenHab2RulesGenerator/releases). You may also download the "example.zip" to have some working example to test with. If you have any further questions on how to use the application, feel free to contact me.
 
 You will need the following files to get things working...
 
