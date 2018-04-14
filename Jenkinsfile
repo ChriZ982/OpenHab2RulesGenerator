@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo 'Testing done'
+        echo 'Testing done.'
       }
     }
     stage('Finish') {
