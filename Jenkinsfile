@@ -10,7 +10,7 @@ pipeline {
       parallel {
         stage('Windows Release|x86') {
           steps {
-            bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe" "${workspace}\\OpenHab2RulesGenerator.sln" /p:configuration=Release /p:platform=x86 /t:rebuild'
+            bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe" "pwd()\\OpenHab2RulesGenerator.sln" /p:configuration=Release /p:platform=x86 /t:rebuild'
           }
         }
         stage('Windows Debug|x86') {
