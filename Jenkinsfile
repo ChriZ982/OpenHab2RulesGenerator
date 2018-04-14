@@ -1,6 +1,9 @@
 pipeline {
   agent any
   stages {
+    stage('Init') {
+      
+    }
     stage('Builds') {
       parallel {
         stage('Windows Release|x86') {
@@ -23,6 +26,11 @@ pipeline {
             bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe" "C:\\Program Files (x86)\\Jenkins\\workspace\\OpenHab2RulesGenerator\\OpenHab2RulesGenerator.sln" /p:configuration=Debug /p:platform=x64 /t:rebuild'
           }
         }
+      }
+    }
+    stage('Test') {
+      steps {
+        echo 'Testing done'
       }
     }
     stage('Finish') {
