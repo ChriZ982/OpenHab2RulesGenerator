@@ -38,6 +38,7 @@ pipeline {
     stage('Finish') {
       steps {
         echo 'Build done'
+        cleanWs(cleanWhenSuccess: true)
       }
     }
   }
