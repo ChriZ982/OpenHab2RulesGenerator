@@ -2,7 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Init') {
-      
+      steps {
+        echo 'Init done'
+      }
     }
     stage('Builds') {
       parallel {
