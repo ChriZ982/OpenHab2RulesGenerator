@@ -70,24 +70,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\windows\</IntDir>
-    <TargetName>OH2RulesGenerator-win10-$(PlatformTarget)</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\windows\$(PlatformTarget)\</IntDir>
+    <TargetName>OH2RulesGenerator-win10-$(Configuration)-$(PlatformTarget)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\windows\</IntDir>
-    <TargetName>OH2RulesGenerator-win10-$(PlatformTarget)</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\windows\$(PlatformTarget)\</IntDir>
+    <TargetName>OH2RulesGenerator-win10-$(Configuration)-$(PlatformTarget)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\windows\</IntDir>
-    <TargetName>OH2RulesGenerator-win10-$(PlatformTarget)</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\windows\$(PlatformTarget)\</IntDir>
+    <TargetName>OH2RulesGenerator-win10-$(Configuration)-$(PlatformTarget)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\windows\</IntDir>
-    <TargetName>OH2RulesGenerator-win10-$(PlatformTarget)</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\windows\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\windows\$(PlatformTarget)\</IntDir>
+    <TargetName>OH2RulesGenerator-win10-$(Configuration)-$(PlatformTarget)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
