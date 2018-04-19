@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Init') {
-      steps {
-        echo 'Init done.'
-      }
-    }
     stage('Builds') {
       parallel {
         stage('Windows Release|x86') {
@@ -28,6 +23,15 @@ pipeline {
             bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\amd64\\MSBuild.exe" OpenHab2RulesGenerator.sln /p:configuration=Debug /p:platform=x64 /t:rebuild'
           }
         }
+        stage('Linux') {
+          agent {
+            label 'linux_slave'
+          }
+          steps {
+            sh 'make'
+            archiveArtifacts(artifacts: 'bin/*/linux/OH2RulesGenerator-linux-*', onlyIfSuccessful: true)
+          }
+        }
       }
     }
     stage('Test') {
@@ -37,8 +41,7 @@ pipeline {
     }
     stage('Finish') {
       steps {
-        echo 'Build done.'
-        cleanWs(cleanWhenSuccess: true)
+        archiveArtifacts(artifacts: 'bin/*/windows/*/OH2RulesGenerator-win10-*.exe', onlyIfSuccessful: true)
       }
     }
   }
