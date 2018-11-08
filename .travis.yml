@@ -6,7 +6,9 @@ matrix:
       script: ./build.bat
     - os: linux
       dist: xenial
-      script: ./build.sh
+      script:
+        - apt-get install g++-multilib
+        - ./build.sh
 
 deploy:
   provider: releases
