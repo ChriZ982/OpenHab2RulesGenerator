@@ -13,7 +13,7 @@ deploy:
   api_key:
     secure: Oi+hpMssjattBmxwYCnlgt6ZQiFqaEYjNL5taoF79b+27ucSvFpVR9t4jKoBlr0ZbBxmS/q5947emk6QeXQBTTIJ23xRI3txihqRS7CBebMbUZXjXzjIL4J4Y77pQeIVRIkP4ejmg0uvd4SEINEPvFyeXasFj0jQb3dQ+NUHPIAryc7bbA6ItZudTcuR98gISjCCB84DJai8Sx79FSoRGmL6Qav7wzhGoN4kkEEeivCRZPzV1kuJAdyJv3wd+T7AM28CMGhv6gKqb9JMZHvSdeRyWxM+YdQ31s4X8qNlvsa+ovPURi5b45A5aSsXyTmvkAvO1nggzGrrklHybdKvW4LZM8OVob3qlXjDcxllopxIdzzKfy949xgAi5OCWJez5Q1rGz3+06AjxgN94H7Da5zWpWrCtXYvotaKh6dLQmDJpBKdSfLLjTMFFX4U8FAgk4iqsDeFUiRsa/WHWeKhR7BzwekzWDkk/RcV4dwSc21OaOo9eOcBkRmYPsVm/lg88+u2dUwDDy49ghuvJUdXfo8zYTYQcCcdSIO8DWvz6FpxOGxYcvNxfofCvJt1NkcJv7oX/Q2LtHBgDHEbqk68m4WKlKkHL5s/pu9kReuIda82HjdTAUmGSnlz2DKdeIvd38UwPl6Ci/wspOSE7kG9+ssJWjYUsvNe/XSUwymfDjI=
   file_glob: true
-  file: build/release/InstallMonitor-*-*-*
+  file: build/release/OH2RulesGenerator-*-*-*
   skip_cleanup: true
   overwrite: true
   on:
