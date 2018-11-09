@@ -1,22 +1,19 @@
 language: cpp
-
 matrix:
   include:
-    - os: windows
-      script: ./build.bat
-    - os: linux
-      dist: xenial
-      script:
-        - sudo apt-get install -qq g++-multilib
-        - ./build.sh
-
+  - os: windows
+    script: "./build.bat"
+  - os: linux
+    dist: xenial
+    script:
+    - sudo apt-get install -qq g++-multilib
+    - "./build.sh"
 deploy:
   provider: releases
   api_key:
-    secure: xrg8RSszsgJzrWbgA9r1x78FoOsoO7rRopN9tjHz8/SlNv3VQmhexmsP9VLo9iB+jfoPAguE7JbrMVTzcTh9OVk9bt3H8ZYC2uaxc1kGQIahVBtR3BntFmV8nfyAOHYHWHxDozKbGUbuV0dXY2rcga70iEzWeiW65BzgAk6BXDrWF3k21IM9rS2IZuMjgjrsvBgicCgt2RM3jwY+bzMesDmfAgsg37bYtZZ4KpmZ2yxv/lqAgJTKjkbGxL6/O08Lxo42bqfXQ3UYqQozRr7YPZVzEoiTgV6Op6CGyORAqHRcbSydfLPtxMiBwchOPV6sQbxeQ976AOTZu9ducpDBrPi6ztcql3G8XzqrAxVznLakdjIk4AIevrEzprqQlGzMwpLtSVIPhIgtGEBe41V7VOG0stjt4RURPp37/f97QVLySGdW/i38W/jXdIIN6FpwWpmob/HSGxAwPtmLjzYYvI7YQIf2XsHD82AYETS17xp0wN76YTQ306foue4baqJNiCNQq0ljcGoaKtbxjBtMJZAyxWDKaMbKB7osYh49HA64fw74qdzojepHchpC3iKi4HCemPPmVCOI7CRTqMT/+EqA6JiVcjxstJj2ASCW9YoDxvjA0MsBAHHLqsODfkoGe0gZABAcKiJHqauG7Jx0Snqj4sJRK2bxHhVJTMKJDrE=
+    secure: Oi+hpMssjattBmxwYCnlgt6ZQiFqaEYjNL5taoF79b+27ucSvFpVR9t4jKoBlr0ZbBxmS/q5947emk6QeXQBTTIJ23xRI3txihqRS7CBebMbUZXjXzjIL4J4Y77pQeIVRIkP4ejmg0uvd4SEINEPvFyeXasFj0jQb3dQ+NUHPIAryc7bbA6ItZudTcuR98gISjCCB84DJai8Sx79FSoRGmL6Qav7wzhGoN4kkEEeivCRZPzV1kuJAdyJv3wd+T7AM28CMGhv6gKqb9JMZHvSdeRyWxM+YdQ31s4X8qNlvsa+ovPURi5b45A5aSsXyTmvkAvO1nggzGrrklHybdKvW4LZM8OVob3qlXjDcxllopxIdzzKfy949xgAi5OCWJez5Q1rGz3+06AjxgN94H7Da5zWpWrCtXYvotaKh6dLQmDJpBKdSfLLjTMFFX4U8FAgk4iqsDeFUiRsa/WHWeKhR7BzwekzWDkk/RcV4dwSc21OaOo9eOcBkRmYPsVm/lg88+u2dUwDDy49ghuvJUdXfo8zYTYQcCcdSIO8DWvz6FpxOGxYcvNxfofCvJt1NkcJv7oX/Q2LtHBgDHEbqk68m4WKlKkHL5s/pu9kReuIda82HjdTAUmGSnlz2DKdeIvd38UwPl6Ci/wspOSE7kG9+ssJWjYUsvNe/XSUwymfDjI=
   file_glob: true
-  file:
-    - build/release/InstallMonitor-*-*-*
+  file: build/release/InstallMonitor-*-*-*
   skip_cleanup: true
   overwrite: true
   on:
