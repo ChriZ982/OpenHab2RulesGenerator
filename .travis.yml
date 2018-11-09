@@ -7,7 +7,7 @@ matrix:
     - os: linux
       dist: xenial
       script:
-        - sudo apt-get install g++-multilib
+        - sudo apt-get install -qq g++-multilib
         - ./build.sh
 
 deploy:
